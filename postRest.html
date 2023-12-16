@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Restaurant</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <style>
+        small{
+            background-color:yellow;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("#namecheck").hide();
+            let nameError=true;
+            $("#name").keyup(function(){
+                validateName();
+            });
+            function validateName(){
+                let nameValue=$("#name").val();
+                if (nameValue.length==""){
+                    $("#namecheck").show();
+                    nameError=false;
+                    return false;
+                }
+                else if (nameValue.length < 3){
+                    $("#namecheck").show();
+                    $("#namecheck").html("Restaurant name is at least 3 characters");
+                    nameError = false;
+                    return false;
+                }
+                else {
+                    $("#namecheck").hide();
+                }
+            }
+
+            $("#daycheck").hide();
+            let dayError=true;
+            $("#day").keyup(function(){
+                validateDay();
+            });
+            function validateDay(){
+                let dayValue=$("#day").val();
+                if (dayValue.length==""){
+                    $("#daycheck").show();
+                    dayError=false;
+                    return false;
+                }
+                else if (dayValue.length < 6){
+                    $("#daycheck").show();
+                    $("#daycheck").html("Operating day is at least 6 characters");
+                    dayError = false;
+                    return false;
+                }
+                else {
+                    $("#daycheck").hide();
+                }
+            }
+
+            $('#openTimecheck').hide();
+            let openError=true;
+            $("#open").change(function(){
+                validateOpen();
+            })
+            function validateOpen(){
+                let openValue=$("#open").val();
+                if (openValue==""){
+                    $("#openTimecheck").show();
+                    openError=false;
+                    return false;
+                }
+                else{
+                    $("#openTimecheck").hide();
+                }
+            }
+
+            $('#closeTimecheck').hide();
+            let closeError=true;
+            $("#close").change(function(){
+                validateClose();
+            })
+            function validateClose(){
+                let closeValue=$("#close").val();
+                if (closeValue==""){
+                    $("#closeTimecheck").show();
+                    closeError=false;
+                    return false;
+                }
+                else{
+                    $("#closeTimecheck").hide();
+                }
+            }
+
+            $("#phonecheck").hide();
+            let phoneError=true;
+            $("#phone").keyup(function(){
+                validatePhone();
+            });
+            function validatePhone(){
+                let phoneValue=$("#phone").val();
+                if (phoneValue.length==""){
+                    $("#phonecheck").show();
+                    phoneError=false;
+                    return false;
+                }
+                else if (validatePhone_num('phone')){
+                    $("#phonecheck").show();
+                    $("#phonecheck").html("Invalid");
+                    phoneError = false;
+                    return false;
+                }
+                else {
+                    $("#phonecheck").hide();
+                }
+            }
+            
+            function validatePhone_num(phone) {
+                var a = document.getElementById(phone).value;
+                var filter = /^(^\+62|62|^08)(\d{3,4}-?){2}\d{3,4}$/;    
+                if (filter.test(a)) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+            $("#descriptioncheck").hide();
+            let descriptionError=true;
+            $("#description").keyup(function(){
+                validateDescription();
+            });
+            function validateDescription(){
+                let descriptionValue=$("#description").val();
+                if (descriptionValue.length==""){
+                    $("#descriptioncheck").show();
+                    descriptionError=false;
+                    return false;
+                }
+                else if (descriptionValue.length < 30||descriptionValue.length > 250) {
+                    $("#descriptioncheck").show();
+                    $("#descriptioncheck").html("Length of description must be between 30 and 250 characters!");
+                    descriptinoError=false;
+                    return false;
+                }
+                else {
+                    $("#descriptioncheck").hide();
+                }
+            }
+
+            $("#locationcheck").hide();
+            let locationError=true;
+            $("#location").keyup(function(){
+                validateLocation();
+            });
+            function validateLocation(){
+                let locationValue=$("#location").val();
+                if (locationValue.length==""){
+                    $("#locationcheck").show();
+                    locationError=false;
+                    return false;
+                }
+                else {
+                    $("#locationcheck").hide();
+                }
+            }
+
+            $('#photocheck').hide();
+            let photoError=true;
+            $("#img").change(function(){
+                validatePhoto();
+            })
+            function validatePhoto(){
+                let photoValue=$("#img").val();
+                if (photoValue==""){
+                    $("#photocheck").show();
+                    photoError=false;
+                    return false;
+                }
+                else{
+                    $("#photocheck").hide();
+                }
+            }
+
+            $('#categorycheck').hide();
+            let categoryError=true;
+            $("#category").change(function(){
+                validateCategory();
+            })
+            function validateCategory(){
+                let categoryValue=$("#category").val();
+                if (categoryValue=="initial"){
+                    $("#categorycheck").show();
+                    categoryError=false;
+                    return false;
+                }
+                else{
+                    $("#categorycheck").hide();
+                }
+            }
+
+            $("#submitbtn").click(function(event){
+                validateName();
+                validateDescription();
+                validateOpen();
+                validateDay();
+                validatePhone();
+                validateClose();
+                validateLocation();
+                validatePhoto();
+                validateCategory();
+                if (
+                    nameError==true&&
+                    dayError==true&&
+                    openError==true&&
+                    closeError==true&&
+                    phoneError==true&&
+                    descriptionError==true&&
+                    locationError==true&&
+                    phoneError==true&&
+                    categoryError==true
+                ){
+                    return true;
+                } else{
+                    return false;
+                }
+            });
+        });
+    </script>
+</head>
+<body style="background-color: #C7AB59;">
+    <a href="restaurant(1).html"><button class="w3-button w3-blue w3-round w3-ripple">Back</button></a>
+    <div class="w3-container w3-display-middle" style="max-width: 800px;">
+        <form action="/action_page.php" id="submitform" class="needs-validation w3-container w3-card-4 w3-margin w3-round" style="background-color: #302718;color: white;" novalidate>
+            <h2 class="w3-center">Upload Restaurant</h2>
+            <div class="w3-row w3-section w3-rest">
+                <input id="name" class="form-control w3-input w3-border w3-round" type="text" name="name" placeholder="Restaurant Name*" required>
+                <small id="namecheck" class="form-text text-muted invalid-feedback">Restaurant name is missing</small>
+            </div>
+            <!--For date range picker: https://api.jqueryui.com/datepicker/#option-firstDay-->
+            <div class="w3-row w3-section w3-rest">
+                <input id="day" class="form-control w3-input w3-border w3-round" type="text" name="day" placeholder="Operating Day*" required>
+                <small id="daycheck" class="form-text text-muted invalid-feedback">Operating day is missing</small>
+            </div>
+            <div class="w3-row w3-section w3-rest">
+                <label for="open">Select the opening time:</label>
+                <input type="time" id="open" name="open" required>
+                <small id="openTimecheck" class="form-text text-muted invalid-feedback">Opening time is missing</small>
+            </div>
+            <div class="w3-row w3-section w3-rest">
+                <label for="close">Select the closing time:</label>
+                <input type="time" id="close" name="close" required>
+                <small id="closeTimecheck" class="form-text text-muted invalid-feedback">Closing time is missing</small>
+            </div>
+            <!--For phone number validate: https://blog.devgenius.io/how-to-validate-phone-number-using-jquery-cfcb3723f846
+            Regex: https://www.regextester.com/113246
+            -->
+            <div class="w3-section w3-rest">
+                <input id="phone" class="form-control w3-input w3-border w3-round" type="tel" name="phone" placeholder="Phone Number: +62..." required>
+                <small id="phonecheck" class="form-text text-muted invalid-feedback">Phone number is missing</small>
+            </div>
+            <div class="w3-row w3-section w3-rest">
+                <textarea id="description" class="form-control w3-round" name="description" placeholder="Description*" required></textarea>
+                <small id="descriptioncheck" class="form-text text-muted invalid-feedback">Description is missing</small>
+            </div>
+            <div class="w3-section w3-rest">
+                <input id="location" class="form-control w3-input w3-border w3-round" type="text" name="location" placeholder="Location*" required>
+                <small id="locationcheck" class="form-text text-muted invalid-feedback">Location is missing</small>
+            </div>
+
+            <div class="w3-section w3-rest">
+                <label for="img">Select pictures of the restaurant</label>
+                <input type="file" id="img" name="img" accept="image/*" multiple>
+                <small id="photocheck" class="form-text text-muted invalid-feedback">Photo is missing</small>
+            </div>
+            <div class="w3-section w3-rest">
+                <label for="category">Choose a category:</label>
+                <select id="category" name="category" class="form-control w3-input w3-border w3-round" required>
+                    <option value="initial" hidden>Category</option>
+                    <option value="local">Local Indonesian</option>
+                    <option value="asian">Asian</option>
+                    <option value="western">Western</option>
+                </select>
+                <small id="categorycheck" class="form-text text-muted invalid-feedback">Category is missing</small>
+            </div>
+            <div><a href="restaurant(1).html"><input id="submitbtn" type="button" name="submitbtn" value="Submit" class="w3-button w3-blue w3-round w3-block w3-section w3-ripple w3-padding"></a></div>
+        </form>
+    </div>
+</body>
+</html>
