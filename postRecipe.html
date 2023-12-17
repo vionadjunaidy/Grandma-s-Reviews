@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,25 +11,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <style>
-        small {
-            background-color: yellow;
+        small{
+            background-color:yellow;
         }
     </style>
     <script>
         $(document).ready(function () {
             $("#namecheck").hide();
-            let nameError = true;
-            $("#name").keyup(function () {
+            let nameError=true;
+            $("#name").keyup(function(){
                 validateName();
             });
-            function validateName() {
-                let nameValue = $("#name").val();
-                if (nameValue.length == "") {
+            function validateName(){
+                let nameValue=$("#name").val();
+                if (nameValue.length==""){
                     $("#namecheck").show();
-                    nameError = false;
+                    nameError=false;
                     return false;
                 }
-                else if (nameValue.length < 3) {
+                else if (nameValue.length < 3){
                     $("#namecheck").show();
                     $("#namecheck").html("Recipe name is at least 3 characters");
                     nameError = false;
@@ -38,67 +37,79 @@
                 }
                 else {
                     $("#namecheck").hide();
+                    console.log("name success")
+                    nameError=true;
+                    return true;
                 }
             }
 
             $("#descriptioncheck").hide();
-            let descriptionError = true;
-            $("#description").keyup(function () {
+            let descriptionError=true;
+            $("#description").keyup(function(){
                 validateDescription();
             });
-            function validateDescription() {
-                let descriptionValue = $("#description").val();
-                if (descriptionValue.length == "") {
+            function validateDescription(){
+                let descriptionValue=$("#description").val();
+                if (descriptionValue.length==""){
                     $("#descriptioncheck").show();
-                    descriptionError = false;
+                    descriptionError=false;
                     return false;
                 }
-                else if (descriptionValue.length < 30 || descriptionValue.length > 250) {
+                else if (descriptionValue.length < 30||descriptionValue.length > 250) {
                     $("#descriptioncheck").show();
                     $("#descriptioncheck").html("Length of description must be between 30 and 250 characters!");
-                    descriptinoError = false;
+                    descriptionError=false;
                     return false;
                 }
                 else {
                     $("#descriptioncheck").hide();
+                    console.log("description success")
+                    descriptionError=true;
+                    return true;
                 }
             }
 
             $("#portioncheck").hide();
-            let portionError = true;
-            $("#portion").keyup(function () {
+            let portionError=true;
+            $("#portion").keyup(function(){
                 validatePortion();
             });
-            function validatePortion() {
-                let portionValue = $("#portion").val();
-                if (portionValue.length == "") {
+            function validatePortion(){
+                let portionValue=$("#portion").val();
+                if (portionValue.length==""){
                     $("#portioncheck").show();
-                    portionError = false;
+                    portionError=false;
                     return false;
                 }
                 else {
                     $("#portioncheck").hide();
+                    console.log("portion success")
+                    portionError=true;
+                    return true;
                 }
             }
 
-            $("#durationPicker").on("input", function () {
+            $("#durationPicker").on("input", function() {
                 validateDuration();
             });
 
             $("#durationcheck").hide();
-            let durationError = true;
+            let durationError=true;
             function validateDuration() {
                 var durationValue = $("#durationPicker").val().toLowerCase();
 
                 var regex = /^(\d+)\s*(hours?|mins?)\s*((\d+)\s*mins?)?$/;
-                if (durationValue.length == "") {
+                if(durationValue.length==""){
                     $("#durationcheck").show();
-                    durationError = false;
+                    durationError=false;
                     return false;
                 }
                 else if (regex.test(durationValue)) {
                     console.log("Valid duration:", durationValue);
                     $("#durationcheck").hide()
+                    console.log("duration success")
+                    durationError=true;
+                    return true;
                 } else {
                     console.log("Invalid duration:", durationValue);
                     $("#durationcheck").show()
@@ -106,23 +117,26 @@
                 }
             }
 
-            $("#durationPicker2").on("input", function () {
+            $("#durationPicker2").on("input", function() {
                 validateDuration2();
             });
             $("#durationcheck2").hide();
-            let duration2Error = true;
+            let duration2Error=true;
             function validateDuration2() {
                 var duration2Value = $("#durationPicker2").val().toLowerCase();
 
                 var regex = /^(\d+)\s*(hours?|mins?)\s*((\d+)\s*mins?)?$/;
-                if (duration2Value.length == "") {
+                if(duration2Value.length==""){
                     $("#durationcheck2").show();
-                    duration2Error = false;
+                    duration2Error=false;
                     return false;
                 }
                 else if (regex.test(duration2Value)) {
                     console.log("Valid duration:", duration2Value);
                     $("#durationcheck2").hide()
+                    console.log("duration 2 success")
+                    duration2Error=true;
+                    return true;
                 } else {
                     console.log("Invalid duration:", duration2Value);
                     $("#durationcheck2").show()
@@ -130,7 +144,7 @@
                 }
             }
 
-            $(function () {
+            $(function() {
                 function addListItem($input, $list, e) {
                     if (e.type === "keydown" && e.which !== 13) return;
 
@@ -149,92 +163,104 @@
                     $input2 = $("#listStep"),
                     $list2 = $("#list2");
 
-                $("#btn1").click(function (e) {
-                    addListItem($input1, $list1, e);
+                $("#btn1").click(function(e) {
+                addListItem($input1, $list1, e);
                 });
 
-                $("#listIngredient").keydown(function (e) {
-                    addListItem($input1, $list1, e);
+                $("#listIngredient").keydown(function(e) {
+                addListItem($input1, $list1, e);
                 });
 
-                $("#btn2").click(function (e) {
-                    addListItem($input2, $list2, e);
+                $("#btn2").click(function(e) {
+                addListItem($input2, $list2, e);
                 });
 
-                $("#listStep").keydown(function (e) {
-                    addListItem($input2, $list2, e);
+                $("#listStep").keydown(function(e) {
+                addListItem($input2, $list2, e);
                 });
             });
 
             $("#list1check").hide();
-            let ingredientError = true;
-            $("#list1").on("input", function () {
+            let ingredientError=true;
+            $("#list1").on("input",function(){
                 validateIngredient();
             })
-            function validateIngredient() {
-                let ingredientValue = $("#list1").find("li");
-                if (ingredientValue.length === 0) {
+            function validateIngredient(){
+                let ingredientValue=$("#list1").find("li");
+                if (ingredientValue.length===0){
                     $("#list1check").show();
-                    ingredientError = false;
+                    ingredientError=false;
                     return false;
                 }
                 else {
                     $("#list1check").hide();
+                    console.log("ingredient success")
+                    ingredientError=true;
+                    return true;
                 }
             }
 
             $("#list2check").hide();
-            let stepError = true;
-            $("#list2").on("input", function () {
+            let stepError=true;
+            $("#list2").on("input",function(){
                 validateStep();
             })
-            function validateStep() {
-                let stepValue = $("#list2").find("li");
-                if (stepValue.length === 0) {
+            function validateStep(){
+                let stepValue=$("#list2").find("li");
+                if (stepValue.length===0){
                     $("#list2check").show();
-                    stepError = false;
+                    stepError=false;
                     return false;
                 }
                 else {
                     $("#list2check").hide();
+                    console.log("step success")
+                    stepError=true;
+                    return true;
                 }
             }
 
             $('#photocheck').hide();
-            let photoError = true;
-            $("#img").change(function () {
+            let photoError=true;
+            $("#img").change(function(){
                 validatePhoto();
             })
-            function validatePhoto() {
-                let photoValue = $("#img").val();
-                if (photoValue == "") {
+            function validatePhoto(){
+                let photoValue=$("#img").val();
+                if (photoValue==""){
                     $("#photocheck").show();
-                    photoError = false;
+                    photoError=false;
                     return false;
                 }
-                else {
+                else{
                     $("#photocheck").hide();
+                    console.log("photo success")
+                    photoError=true;
+                    return true;
                 }
             }
 
             $('#categorycheck').hide();
-            let categoryError = true;
-            $("#category").change(function () {
+            let categoryError=true;
+            $("#category").change(function(){
                 validateCategory();
             })
-            function validateCategory() {
-                let categoryValue = $("#category").val();
-                if (categoryValue == "initial") {
+            function validateCategory(){
+                let categoryValue=$("#category").val();
+                if (categoryValue=="initial"){
                     $("#categorycheck").show();
-                    categoryError = false;
+                    categoryError=false;
                     return false;
                 }
-                else {
+                else{
                     $("#categorycheck").hide();
+                    console.log("category success")
+                    categoryError=true;
+                    return true;
                 }
             }
 
-            $("#submitbtn").click(function (event) {
+            $("#submitbtn").click(function(event){
                 validateName();
                 validateDescription();
                 validatePortion();
@@ -245,78 +271,75 @@
                 validateDuration();
                 validateDuration2();
                 if (
-                    nameError == true &&
-                    descriptionError == true &&
-                    portionError == true &&
-                    ingredientError == true &&
-                    stepError == true &&
-                    durationError == true &&
-                    duration2Error == true &&
-                    photoError == true &&
-                    categoryError == true
-                ) {
+                    nameError==true&&
+                    descriptionError==true&&
+                    portionError==true&&
+                    ingredientError==true&&
+                    stepError==true&&
+                    durationError==true&&
+                    duration2Error==true&&
+                    photoError==true&&
+                    categoryError==true
+                ){
+                    console.log("success")
                     return true;
-                } else {
+                } else{
+                    console.log("failure")
+                    console.log("nameError:",nameError)
+                    console.log("descriptionError:",descriptionError)
+                    console.log("portionError:",portionError)
+                    console.log("ingredientError:",ingredientError)
+                    console.log("stepError:",stepError)
+                    console.log("durationError:",durationError)
+                    console.log("duration2Error:",duration2Error)
+                    console.log("photoError:",photoError)
+                    console.log("categoryError:",categoryError)
                     return false;
                 }
             });
         });
     </script>
 </head>
-
 <body style="background-color: #C7AB59;">
     <a href="recipe(1).html"><button class="w3-button w3-blue w3-round w3-ripple">Back</button></a>
     <div style="display: flex;flex-wrap: wrap;justify-content: center;">
         <div class="w3-container w3-padding" style="max-width: 800px;">
-            <form action="/action_page.php" id="submitform"
-                class="needs-validation w3-container w3-card-4 w3-margin w3-round"
-                style="background-color: #302718;color: white;" novalidate>
+            <form action="/action_page.php" id="submitform" class="needs-validation w3-container w3-card-4 w3-margin w3-round" style="background-color: #302718;color: #DED2A8; padding: 30px; border-radius: 20px;" novalidate>
                 <h2 class="w3-center">Upload Recipe</h2>
                 <div class="w3-row w3-section w3-rest">
-                    <input id="name" class="form-control w3-input w3-border w3-round" type="text" name="name"
-                        placeholder="Recipe Name*" required>
+                    <input id="name" class="form-control w3-input w3-border w3-round" type="text" name="name" placeholder="Recipe Name*" required>
                     <small id="namecheck" class="form-text text-muted invalid-feedback">Recipe name is missing</small>
                 </div>
                 <div class="w3-row w3-section w3-rest">
-                    <textarea id="description" class="form-control w3-round" name="description"
-                        placeholder="Description*" required></textarea>
-                    <small id="descriptioncheck" class="form-text text-muted invalid-feedback">Description is
-                        missing</small>
+                    <textarea id="description" class="form-control w3-round" name="description" placeholder="Description*" required></textarea>
+                    <small id="descriptioncheck" class="form-text text-muted invalid-feedback">Description is missing</small>
                 </div>
                 <div class="w3-row w3-section w3-rest">
-                    <input type="number" class="form-control w3-input w3-border w3-round" id="portion" name="portion"
-                        placeholder="Portion*">
+                    <input type="number" class="form-control w3-input w3-border w3-round" id="portion" name="portion" placeholder="Portion*">
                     <small id="portioncheck" class="form-text text-muted invalid-feedback">Portion is missing</small>
                 </div>
                 <div class="w3-section w3-rest">
-                    <input type="text" id="durationPicker" class="form-control w3-input w3-border w3-round"
-                        placeholder="Preparation time (e.g., 10 mins or 1 hour)" required>
+                    <input type="text" id="durationPicker" class="form-control w3-input w3-border w3-round" placeholder="Preparation time (e.g., 10 mins or 1 hour)" required>
                     <small id="durationcheck" class="form-text text-muted invalid-feedback">Prep time is missing</small>
                 </div>
                 <div class="w3-section w3-rest">
-                    <input type="text" id="durationPicker2" class="form-control w3-input w3-border w3-round"
-                        placeholder="Cooking time (e.g., 10 mins or 1 hour)" required>
-                    <small id="durationcheck2" class="form-text text-muted invalid-feedback">Cook time is
-                        missing</small>
+                    <input type="text" id="durationPicker2" class="form-control w3-input w3-border w3-round" placeholder="Cooking time (e.g., 10 mins or 1 hour)" required>
+                    <small id="durationcheck2" class="form-text text-muted invalid-feedback">Cook time is missing</small>
                 </div>
                 <!--https://stackoverflow.com/questions/41919385/how-to-add-new-items-in-jquery-to-do-list-when-enter-is-pressed-->
                 <hr style="border-color: white;border-width: 2px;">
                 <div class="w3-section w3-rest">
-                    <input type="text" class="form-control w3-input w3-border w3-round" id="listIngredient"
-                        name="listIngredient" placeholder="Input ingredients*:" required>
+                    <input type="text" class="form-control w3-input w3-border w3-round" id="listIngredient" name="listIngredient" placeholder="Input ingredients*:" required>
                     <small id="list1check" class="form-text text-muted invalid-feedback">Ingredient is missing</small>
                     <ol id="list1"></ol>
-                    <button id="btn1" class="w3-button w3-green w3-round w3-block w3-section w3-ripple w3-padding">Add
-                        ingredient</button>
+                    <button id="btn1" class="w3-button w3-green w3-round w3-block w3-section w3-ripple w3-padding">Add ingredient</button>
                 </div>
                 <hr style="border-color: white;border-width: 2px;">
                 <div class="w3-section w3-rest">
-                    <input type="text" class="form-control w3-input w3-border w3-round" id="listStep" name="listStep"
-                        placeholder="Input steps*:" required>
+                    <input type="text" class="form-control w3-input w3-border w3-round" id="listStep" name="listStep" placeholder="Input steps*:" required>
                     <small id="list2check" class="form-text text-muted invalid-feedback">Step is missing</small>
                     <ol id="list2"></ol>
-                    <button id="btn2" class="w3-button w3-green w3-round w3-block w3-section w3-ripple w3-padding">Add
-                        step</button>
+                    <button id="btn2" class="w3-button w3-green w3-round w3-block w3-section w3-ripple w3-padding">Add step</button>
                 </div>
                 <hr style="border-color: white;border-width: 2px;">
                 <div class="w3-section w3-rest">
@@ -334,12 +357,9 @@
                     </select>
                     <small id="categorycheck" class="form-text text-muted invalid-feedback">Category is missing</small>
                 </div>
-                
-                <div><a href="recipe(1).html"><input id="submitbtn" type="button" name="submitbtn" value="Submit"
-                        class="w3-button w3-blue w3-round w3-block w3-section w3-ripple w3-padding"></a></div>
+                <div><a href="recipe(1).html"><input id="submitbtn" type="button" name="submitbtn" value="Submit" class="w3-button w3-blue w3-round w3-block w3-section w3-ripple w3-padding"></a></div>
             </form>
         </div>
     </div>
 </body>
-
 </html>
